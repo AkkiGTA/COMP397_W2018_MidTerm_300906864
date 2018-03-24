@@ -12,11 +12,15 @@ var objects;
 (function (objects) {
     var PlaneFlash = /** @class */ (function (_super) {
         __extends(PlaneFlash, _super);
-        // private instance variables
         // public properties
         // constructors
-        function PlaneFlash() {
-            return _super.call(this, "planeflash") || this;
+        function PlaneFlash(lvl) {
+            var _this = _super.call(this, "planeflash") || this;
+            _this._lvl = lvl;
+            if (_this._lvl == 2) {
+                _this.rotation = 90;
+            }
+            return _this;
         }
         // private methods
         // public methods
