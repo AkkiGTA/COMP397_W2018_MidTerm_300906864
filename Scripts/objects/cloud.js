@@ -12,11 +12,14 @@ var objects;
 (function (objects) {
     var Cloud = /** @class */ (function (_super) {
         __extends(Cloud, _super);
-        // private instance variables
         // public properties
         // Constructor
-        function Cloud() {
+        function Cloud(lvl) {
             var _this = _super.call(this, "cloud") || this;
+            _this._lvl = lvl;
+            if (_this._lvl == 2) {
+                _this.rotation = 90;
+            }
             _this.Start();
             return _this;
         }
@@ -33,21 +36,42 @@ var objects;
         };
         // reset the objects location to some value
         Cloud.prototype.Reset = function () {
-            this.x = Math.floor((Math.random() * (640 - this.width)) + this.halfWidth);
-            this.y = -this.height;
-            this._dx = Math.floor((Math.random() * 4) - 2);
-            this._dy = Math.floor((Math.random() * 5) + 5);
+            if (this._lvl == 1) {
+                this.x = Math.floor((Math.random() * (640 - this.width)) + this.halfWidth);
+                this.y = -this.height;
+                this._dx = Math.floor((Math.random() * 4) - 2);
+                this._dy = Math.floor((Math.random() * 5) + 5);
+            }
+            else if (this._lvl == 2) {
+                this.y = Math.floor((Math.random() * (480 - this.height)) + this.halfHeight);
+                this.x = this.height + 640;
+                this._dy = Math.floor((Math.random() * 4) - 2);
+                this._dx = Math.floor((Math.random() * 5) + 5);
+            }
         };
         // move the object to some new location
         Cloud.prototype.Move = function () {
-            this.y += this._dy;
-            this.x += this._dx;
+            if (this._lvl == 1) {
+                this.y += this._dy;
+                this.x += this._dx;
+            }
+            else if (this._lvl == 2) {
+                this.y += this._dy;
+                this.x -= this._dx;
+            }
         };
         // check to see if some boundary has been passed
         Cloud.prototype.CheckBounds = function () {
-            // check lower bounds
-            if (this.y >= 480 + this.height) {
-                this.Reset();
+            // check  bounds
+            if (this._lvl == 1) {
+                if (this.y >= 480 + this.height) {
+                    this.Reset();
+                }
+            }
+            else if (this._lvl == 2) {
+                if (this.x <= (-this.width)) {
+                    this.Reset();
+                }
             }
         };
         return Cloud;
