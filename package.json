@@ -8,14 +8,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/AkkiGTA/COMP397-W2018-MidTerm-300906864.git"
+    "url": "git+https://github.com/AkkiGTA/COMP397_W2018_MidTerm_300906864.git"
   },
   "author": "Tom Tsiliopoulos <tsiliopoulos@hotmail.com>",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/AkkiGTA/COMP397-W2018-MidTerm-300906864/issues"
+    "url": "https://github.com/AkkiGTA/COMP397_W2018_MidTerm_300906864/issues"
   },
-  "homepage": "https://github.com/AkkiGTA/COMP397-W2018-MidTerm-300906864#readme",
+  "homepage": "https://github.com/AkkiGTA/COMP397_W2018_MidTerm_300906864#readme",
   "devDependencies": {
     "@types/easeljs": "^1.0.0"
   },
