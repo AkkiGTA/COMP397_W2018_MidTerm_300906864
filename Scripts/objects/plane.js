@@ -13,8 +13,12 @@ var objects;
     var Plane = /** @class */ (function (_super) {
         __extends(Plane, _super);
         // Constructor
-        function Plane() {
+        function Plane(lvl) {
             var _this = _super.call(this, "plane") || this;
+            _this._lvl = lvl;
+            if (_this._lvl == 2) {
+                _this.rotation = 90;
+            }
             _this.Start();
             return _this;
         }
@@ -28,11 +32,17 @@ var objects;
         // public methods
         // Initializes variables and creates new objects
         Plane.prototype.Start = function () {
-            this.planeFlash = new objects.PlaneFlash();
+            this.planeFlash = new objects.PlaneFlash(this._lvl);
             this.planeFlash.alpha = 1;
             this.planeFlash.on("animationend", this._animationEnded.bind(this), false);
-            this.x = 320;
-            this.y = 430;
+            if (this._lvl == 1) {
+                this.x = 320;
+                this.y = 430;
+            }
+            else if (this._lvl == 2) {
+                this.x = 50;
+                this.y = 240;
+            }
         };
         // updates the game object every frame
         Plane.prototype.Update = function () {
@@ -47,11 +57,21 @@ var objects;
             // mouse controls
             // this.x = objects.Game.stage.mouseX;
             // keyboard controls
-            if (managers.Game.keyboardManager.moveLeft) {
-                this.x -= 5;
+            if (this._lvl == 1) {
+                if (managers.Game.keyboardManager.moveLeft) {
+                    this.x -= 5;
+                }
+                if (managers.Game.keyboardManager.moveRight) {
+                    this.x += 5;
+                }
             }
-            if (managers.Game.keyboardManager.moveRight) {
-                this.x += 5;
+            else if (this._lvl == 2) {
+                if (managers.Game.keyboardManager.moveForward) {
+                    this.y -= 5;
+                }
+                if (managers.Game.keyboardManager.moveBackward) {
+                    this.y += 5;
+                }
             }
             this.planeFlash.x = this.x;
             this.planeFlash.y = this.y;
@@ -65,6 +85,14 @@ var objects;
             // left boundary
             if (this.x <= this.halfWidth) {
                 this.x = this.halfWidth;
+            }
+            //upper boundary
+            if (this.y >= 480 - this.halfHeight) {
+                this.y = 480 - this.halfHeight;
+            }
+            // left boundary
+            if (this.y <= this.halfHeight) {
+                this.y = this.halfHeight;
             }
         };
         return Plane;
